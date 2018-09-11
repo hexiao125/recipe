@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router'
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service'
 
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
+  
 })
 export class RecipeListComponent implements OnInit {
-  recipes: Recipe[] = [
-    new Recipe('A test recipe', 'this is a test', 'https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/09/frying-pan-pizza.jpg?itok=ELbVlLN7'),
-    new Recipe('A test recipe', 'this is a test', 'https://www.bbcgoodfood.com/sites/default/files/styles/recipe/public/recipe/recipe-image/2016/09/frying-pan-pizza.jpg?itok=ELbVlLN7')
-  ];
+  recipes: Recipe[];
 
-  constructor() { }
+  constructor(private recipeService: RecipeService, 
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.recipes = this.recipeService.getRecipes();
   }
+
 
 }
